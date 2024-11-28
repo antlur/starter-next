@@ -8,7 +8,10 @@ export function middleware(request: NextRequest) {
   // if not /, throw 404
   if (new URL(request.url).pathname !== "/") {
     console.log("Not found");
-    return new Response("Not found", { status: 404 });
+    return NextResponse.next({
+      status: 404,
+      statusText: "Not Found",
+    });
   }
 
   return NextResponse.next();
