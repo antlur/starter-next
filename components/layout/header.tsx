@@ -13,10 +13,10 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-gray-900 text-white py-4 px-6">
+    <header className="bg-primary text-primary-foreground py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-xl font-bold">
-          <a href="/">Logo</a>
+          <a href="/">Rose</a>
         </div>
         <nav className="hidden md:flex">
           <ul className="flex space-x-4">
