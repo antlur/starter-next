@@ -3,13 +3,12 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  console.log(new URL(request.url).pathname);
-
   // if not /, throw 404
-  // if (new URL(request.url).pathname !== "/") {
-  //   console.log("Not found");
-  //   return new Response("Not found", { status: 404 });
-  // }
+  if (new URL(request.url).pathname !== "/") {
+    // show 404 page
+    console.log("middleware.ts: 404 page");
+    return NextResponse.rewrite(new URL("/404", request.url));
+  }
 
   return NextResponse.next();
 }
