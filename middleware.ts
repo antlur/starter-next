@@ -2,12 +2,25 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   // if not /, throw 404
   if (new URL(request.url).pathname !== "/") {
     // show 404 page
-    console.log("middleware.ts: 404 page");
-    return NextResponse.rewrite(new URL("/404", request.url));
+    // get html from 404 page
+    // const html = `
+    //   <div class="flex flex-col items-center justify-center">
+    //     <h2>Not Found</h2>
+    //     <p>Could not find requested resource</p>
+    //     <a href="/">Return Home</a>
+    //   </div>
+    // `;
+    // const html = await fetch("/").then((res) => res.text());
+    // return new Response(html, {
+    //   status: 404,
+    //   headers: {
+    //     "content-type": "text/html",
+    //   },
+    // });
   }
 
   return NextResponse.next();
