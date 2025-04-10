@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   // if not /, throw 404
   if (new URL(request.url).pathname !== "/") {
     // show 404 page
