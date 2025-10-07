@@ -9,7 +9,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "setup": "cp .env.example .env"
+    "setup": "mv .env.example .env;"
   },
   "dependencies": {
     "@next/third-parties": "15.5.4",
