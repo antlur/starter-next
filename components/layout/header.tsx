@@ -13,7 +13,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-primary text-primary-foreground py-4 px-6">
+    <header className="bg-header text-header-foreground py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-xl font-bold">
           <a href="/">Rose</a>

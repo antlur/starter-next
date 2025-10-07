@@ -42,6 +42,12 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  /* ANTLUR Variables */
+  --color-header: var(--primary);
+  --color-header-foreground: var(--primary-foreground);
+  --color-footer: var(--primary);
+  --color-footer-foreground: var(--primary-foreground);
 }
 
 /*

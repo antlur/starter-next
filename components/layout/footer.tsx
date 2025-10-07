@@ -2,7 +2,7 @@ import Deerhead from "@/app/icon.svg";
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground py-4">
+    <footer className="bg-footer text-footer-foreground py-4">
       <div className="container mx-auto text-center flex items-center justify-center gap-1">
         <span>Website powered by</span>
         <Deerhead className="inline-block size-5 fill-current text-current" />
