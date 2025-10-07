@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Home({ params, searchParams }: PageProps<"/">) {
   return (
     <div>
       <div className="max-w-xl">
