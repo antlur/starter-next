@@ -20,6 +20,29 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Features
+
+### Cache Revalidation API
+
+This starter includes an API endpoint for clearing Next.js data cache, useful for headless API integrations.
+
+- **Endpoint**: `POST /api/revalidate`
+- **Headers**: `x-revalidate-secret: <your-secret>`
+- **Body** (JSON):
+  - To invalidate by tag: `{"tag": "your-cache-tag"}`
+  - To invalidate by path: `{"path": "/your-path"}`
+
+Example usage with curl:
+
+```bash
+curl -X POST http://localhost:3000/api/revalidate \
+  -H "x-revalidate-secret: your-secret-here" \
+  -H "Content-Type: application/json" \
+  -d '{"tag": "posts"}'
+```
+
+Set `REVALIDATE_SECRET` in your `.env` file for security.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
