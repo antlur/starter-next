@@ -14,9 +14,9 @@ export function Header() {
 
   return (
     <header className="bg-header text-header-foreground py-4 px-6">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="mx-auto flex justify-between items-center">
         <div className="text-xl font-bold">
-          <a href="/">Rose</a>
+          <a href="/">Antlur Next.js Starter</a>
         </div>
         <nav className="hidden md:flex">
           <ul className="flex space-x-4">
