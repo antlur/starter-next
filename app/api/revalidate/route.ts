@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const { tag, path } = body;
 
     if (tag) {
-      revalidateTag(tag);
+      revalidateTag(tag, "max");
       return NextResponse.json({ message: `Cache invalidated for tag: ${tag}` });
     } else if (path) {
       revalidatePath(path);
