@@ -2,8 +2,29 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["cdn.bckstg.app"],
+    domains: ["localhost", "bckstg.app", "backstage.test", "imgix.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.bckstg.app",
+      },
+      {
+        protocol: "https",
+        hostname: "*.backstage.test",
+      },
+      {
+        protocol: "https",
+        hostname: "*.imgix.net",
+      },
+    ],
+    dangerouslyAllowSVG: true,
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  cacheComponents: true,
 
   // typescript: {
   //   ignoreBuildErrors: true,

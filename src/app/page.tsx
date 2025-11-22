@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { RemoteData } from "@/components/data";
+import { Suspense } from "react";
 
 export default function Home({ params, searchParams }: PageProps<"/">) {
   return (
@@ -11,6 +13,10 @@ export default function Home({ params, searchParams }: PageProps<"/">) {
           height={1080}
         />
       </div>
+      {/* <Suspense fallback={<div>Loading remote data...</div>}>
+        <RemoteData />
+        <RemoteData page={2} />
+      </Suspense> */}
     </div>
   );
 }
