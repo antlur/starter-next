@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { SkipToMain } from "@/components/skip-to-main";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,11 +36,23 @@ export default function RootLayout({
         <SkipToMain />
         <Header />
         <main id="main" className="grow">
-          {children}
+          <Suspense fallback={<LoadingSkeleton />}>{children}</Suspense>
         </main>
         <Footer />
       </body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="p-8">
+      <div className="animate-pulse space-y-4">
+        <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+        <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+        <div className="h-6 bg-gray-300 rounded w-1/4"></div>
+      </div>
+    </div>
   );
 }

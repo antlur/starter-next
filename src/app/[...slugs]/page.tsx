@@ -1,8 +1,5 @@
 import { notFound } from "next/navigation";
 import { client } from "@backstage/client";
-import PageFactory from "@/views/page-factory";
-import { cookies } from "next/headers";
-import { Page } from "@antlur/backstage";
 import { Route, RouteFactory } from "@/views/route-factory";
 
 export async function generateStaticParams() {
@@ -16,31 +13,26 @@ export async function generateStaticParams() {
   }));
 }
 
+async function getResolvedRoute(path: string): Promise<Route | null> {
+  "use cache";
+  return await client.routes.resolve<Route>(path).catch(() => null);
+}
+
+function makeRoutePath(slugs: string[] | undefined): string {
+  if (!slugs || slugs.length === 0) {
+    return "/";
+  }
+  return "/" + slugs.join("/");
+}
+
 export default async function AppPage(props: PageProps<"/[...slugs]">) {
-  const params = await props.params;
-  const slugs = params.slugs;
-  let path = "/";
-  if (slugs && slugs.length > 0) {
-    path += slugs.join("/");
-  }
-
-  let route;
-
-  try {
-    route = await client.get<Route>(`/routes/resolve?path=${path}`);
-  } catch (error) {
-    console.error("Error fetching route:", error);
-  }
+  const { slugs } = await props.params;
+  const path = makeRoutePath(slugs);
+  const route = await getResolvedRoute(path);
 
   if (!route) {
     return notFound();
   }
-
-  // return (
-  //   <div>
-  //     <pre>{JSON.stringify(route, null, 2)}</pre>
-  //   </div>
-  // );
 
   return <RouteFactory route={route} />;
 }
