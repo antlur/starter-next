@@ -6,10 +6,10 @@ export const client = new BackstageClient({
   token: process.env.BACKSTAGE_API_KEY,
 });
 
-import { generateFavicons } from "./generate-favicons";
-import { themeColors } from "./theme-colors";
-import { fontFamilies } from "./font-families";
-import { generateRedirects } from "./redirects";
+import { generateFavicons } from "./generate-favicons.ts";
+import { themeColors } from "./theme-colors.ts";
+import { fontFamilies } from "./font-families.ts";
+import { generateRedirects } from "./redirects.ts";
 
 async function run() {
   const website = await client.website.getWebsite();
