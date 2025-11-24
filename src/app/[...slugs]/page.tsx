@@ -6,7 +6,7 @@ import { Page } from "@antlur/backstage";
 import { Route, RouteFactory } from "@/views/route-factory";
 
 // true is important for revalidatePath()
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 // Default revalidation time (1 year in seconds)
 // export const revalidate = 31536000;
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function AppPage(props: PageProps<"/[[...slugs]]">) {
+export default async function AppPage(props: PageProps<"/[...slugs]">) {
   const params = await props.params;
   const slugs = params.slugs;
   let path = "/";
