@@ -30,7 +30,8 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "theme-colors": "^0.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
