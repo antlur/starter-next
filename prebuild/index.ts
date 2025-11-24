@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { BackstageClient } from "@antlur/backstage";
 
 export const client = new BackstageClient({
