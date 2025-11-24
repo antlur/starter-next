@@ -5,12 +5,6 @@ import { cookies } from "next/headers";
 import { Page } from "@antlur/backstage";
 import { Route, RouteFactory } from "@/views/route-factory";
 
-// true is important for revalidatePath()
-export const dynamicParams = false;
-
-// Default revalidation time (1 year in seconds)
-// export const revalidate = 31536000;
-
 export async function generateStaticParams() {
   const routes = await client.website.routes();
 
