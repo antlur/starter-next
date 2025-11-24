@@ -1,3 +1,4 @@
+"use cache";
 import { notFound } from "next/navigation";
 import { client } from "@backstage/client";
 import { Route, RouteFactory } from "@/views/route-factory";
@@ -26,7 +27,6 @@ function makeRoutePath(slugs: string[] | undefined): string {
 }
 
 export default async function AppPage(props: PageProps<"/[...slugs]">) {
-  "use cache";
   const { slugs } = await props.params;
   const path = makeRoutePath(slugs);
   const route = await getResolvedRoute(path);
