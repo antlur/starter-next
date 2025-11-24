@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node --experimental-strip-types ./prebuild/index.ts",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
@@ -12,6 +13,7 @@
     "setup": "mv .env.example .env;"
   },
   "dependencies": {
+    "@antlur/backstage": "^1.12.1",
     "@next/third-parties": "16.0.3",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
