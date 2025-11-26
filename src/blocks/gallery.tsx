@@ -1,16 +1,30 @@
+/**
+ * Gallery Block
+ *
+ * REQUIRES: npm install lightgallery
+ *
+ * Once installed, uncomment the lightgallery imports and the LightGallery component below.
+ * Also uncomment the gallery entry in src/components/blocks.tsx
+ */
 "use client";
-import LightGallery from "lightgallery/react";
-
-// import styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
+// Uncomment after: npm install lightgallery
+// import LightGallery from "lightgallery/react";
+// import "lightgallery/css/lightgallery.css";
+// import "lightgallery/css/lg-zoom.css";
+// import "lightgallery/css/lg-thumbnail.css";
 import BackstageImage from "@/components/backstage-image";
+import type { MediaItem } from "@antlur/backstage";
 
-export default function Gallery({ media_ids, title, max_columns = 3 }) {
+interface GalleryProps {
+  media_ids: MediaItem[];
+  title?: string;
+  max_columns?: number;
+}
+
+export default function Gallery({ media_ids, title, max_columns = 3 }: GalleryProps) {
   max_columns ??= 3;
 
-  const classMap = {
+  const classMap: Record<number, string> = {
     2: "grid-cols-2",
     3: "grid-cols-3",
     4: "lg:grid-cols-4",
@@ -49,28 +63,31 @@ export default function Gallery({ media_ids, title, max_columns = 3 }) {
                 width={getImageMaxWidth()}
                 height={getImageMaxWidth()}
                 className="object-cover w-full h-full"
-                alt={media.alt}
+                alt={media.alt ?? ""}
                 fill
               />
             </div>
           ))}
         </div>
-        <div className="hidden">
-          <LightGallery startClass={`grid gap-4 grid-cols-1 ${gridClass}`} getCaptionFromTitleOrAlt={false}>
-            {media_ids.map((media) => (
-              <a key={media.id} id={`grid-item_${media.id}`} className="relative block aspect-4/3" href={media.url}>
-                <BackstageImage
-                  src={media.url}
-                  width={800}
-                  height={600}
-                  className="object-cover w-full h-full"
-                  alt={media.alt}
-                  fill
-                />
-              </a>
-            ))}
-          </LightGallery>
-        </div>
+        {/* 
+          Uncomment after: npm install lightgallery
+          <div className="hidden">
+            <LightGallery startClass={`grid gap-4 grid-cols-1 ${gridClass}`} getCaptionFromTitleOrAlt={false}>
+              {media_ids.map((media) => (
+                <a key={media.id} id={`grid-item_${media.id}`} className="relative block aspect-4/3" href={media.url}>
+                  <BackstageImage
+                    src={media.url}
+                    width={800}
+                    height={600}
+                    className="object-cover w-full h-full"
+                    alt={media.alt ?? ""}
+                    fill
+                  />
+                </a>
+              ))}
+            </LightGallery>
+          </div>
+        */}
       </div>
     </div>
   );

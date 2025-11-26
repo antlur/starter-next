@@ -1,8 +1,14 @@
 import "dotenv/config";
 import { BackstageClient } from "@antlur/backstage";
 
+/**
+ * Prebuild Backstage Client
+ * Uses the same base URL and credentials as the runtime client
+ * but doesn't import the full config to avoid ESM resolution issues
+ * with layouts/blocks during prebuild
+ */
 export const client = new BackstageClient({
-  baseURL: "https://bckstg.app/api",
+  baseURL: process.env.BACKSTAGE_BASE_URL || "https://bckstg.app/api",
   accountId: process.env.BACKSTAGE_ACCOUNT_ID,
   token: process.env.BACKSTAGE_API_KEY,
 });

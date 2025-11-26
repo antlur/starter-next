@@ -1,9 +1,16 @@
 "use client";
 import cx from "classnames";
 import BackstageImage from "@/components/backstage-image";
+import type { MediaItem } from "@antlur/backstage";
 
-export default function ImageGrid({ media_ids, title, max_columns = 3 }) {
-  const classMap = {
+interface ImageGridProps {
+  media_ids: MediaItem[];
+  title?: string;
+  max_columns?: number;
+}
+
+export default function ImageGrid({ media_ids, title, max_columns = 3 }: ImageGridProps) {
+  const classMap: Record<number, string> = {
     2: "lg:grid-cols-2",
     3: "lg:grid-cols-3",
     4: "lg:grid-cols-4",
@@ -41,7 +48,7 @@ export default function ImageGrid({ media_ids, title, max_columns = 3 }) {
               width={getImageMaxWidth()}
               height={getImageMaxWidth()}
               className="object-cover w-full h-full"
-              alt={media.alt}
+              alt={media.alt ?? ""}
               fill
             />
           </div>

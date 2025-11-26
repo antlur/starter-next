@@ -4,8 +4,13 @@ import { dateString, timeString } from "@antlur/backstage/util/event";
 import BackstageImage from "@/components/backstage-image";
 import { PlaceholderImage } from "./placeholder-image";
 import { Prose } from "@/components/prose";
+import type { Event } from "@/types/backstage";
 
-export function SingleEvent({ event }) {
+interface SingleEventProps {
+  event: Event;
+}
+
+export function SingleEvent({ event }: SingleEventProps) {
   return (
     <Card className="overflow-hidden">
       <div className="aspect-[1920/1005]  w-full">
@@ -19,7 +24,7 @@ export function SingleEvent({ event }) {
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-6">
-        <Prose html={event.description} />
+        <Prose html={event.description ?? ""} />
       </CardContent>
     </Card>
   );

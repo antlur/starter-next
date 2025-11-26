@@ -1,28 +1,31 @@
-// export const fieldTypes = [
-//   { label: "Short Answer", value: "text", hasOptions: false, multipleValues: false },
-//   { label: "Long Answer", value: "textarea", hasOptions: false, multipleValues: false },
-//   { label: "Email Field", value: "email", hasOptions: false, multipleValues: false },
-//   { label: "Phone Field", value: "phone", hasOptions: false, multipleValues: false },
-//   { label: "Single Choice", value: "single-choice", hasOptions: true, multipleValues: false },
-//   { label: "Multiple Choice", value: "multiple-choice", hasOptions: true, multipleValues: true },
-//   { label: "Dropdown", value: "dropdown", hasOptions: true, multipleValues: false },
-//   { label: "Date Field", value: "date", hasOptions: false, multipleValues: false },
-//   { label: "Time Field", value: "time", hasOptions: false, multipleValues: false },
-//   { label: "Location Field", value: "location", hasOptions: false, multipleValues: false },
-//   { label: "File Upload", value: "file", hasOptions: false, multipleValues: false },
-// ];
+/**
+ * Form Factory Component
+ *
+ * Renders dynamic form fields based on CMS form schema.
+ * Supports multiple field types: text, textarea, email, phone, choices, etc.
+ */
 
-// export const typeFromValue = (value) => {
-//   const fieldType = fieldTypes.find((fieldType) => fieldType.value === value);
-//   return fieldType ? fieldType : fieldTypes[0];
-// };
+// Form field types supported by the CMS
+export interface FormField {
+  type: string;
+  name?: string;
+  label: string;
+  required?: boolean;
+  options?: Array<{ label: string; value: string }>;
+}
 
-// export const labelFromValue = (value) => {
-//   const fieldType = typeFromValue(value);
-//   return fieldType.label;
-// };
+// Form schema from CMS
+export interface FormSchema {
+  id?: string;
+  type?: string;
+  fields: FormField[];
+}
 
-export function FormFactory({ form }) {
+interface FormFactoryProps {
+  form: FormSchema;
+}
+
+export function FormFactory({ form }: FormFactoryProps) {
   const schema = form.fields;
 
   return (
@@ -100,7 +103,7 @@ export function FormFactory({ form }) {
                   className="w-full px-2 py-1 border border-gray-400 rounded"
                   required={field.required}
                 >
-                  {field.options.map((option, index) => (
+                  {field.options?.map((option, index) => (
                     <option key={index} value={option.value}>
                       {option.label}
                     </option>
@@ -114,7 +117,7 @@ export function FormFactory({ form }) {
                 <label htmlFor={field.name} className="block font-bold">
                   {field.label}
                 </label>
-                {field.options.map((option, index) => (
+                {field.options?.map((option, index) => (
                   <div key={index}>
                     <input type="checkbox" id={field.name} name={field.name} value={option.value} />
                     <label htmlFor={field.name}>{option.label}</label>
@@ -135,9 +138,9 @@ export function FormFactory({ form }) {
                   required={field.required}
                 >
                   <option value="">Select an option</option>
-                  {field.options.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                  {field.options?.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
                     </option>
                   ))}
                 </select>
@@ -185,7 +188,7 @@ export function FormFactory({ form }) {
                   className="w-full px-2 py-1 border border-gray-400 rounded"
                   required={field.required}
                 >
-                  {field.options.map((option, index) => (
+                  {field.options?.map((option, index) => (
                     <option key={index} value={option.value}>
                       {option.label}
                     </option>

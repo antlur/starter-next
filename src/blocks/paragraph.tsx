@@ -1,22 +1,32 @@
 import { decode } from "html-entities";
+import type { BlockTunes } from "@/types/backstage";
 
-export default function Paragraph({ data, tunes }) {
+interface ParagraphData {
+  text: string;
+}
+
+interface ParagraphProps {
+  data: ParagraphData;
+  tunes?: BlockTunes;
+}
+
+export default function Paragraph({ data, tunes }: ParagraphProps) {
   const textAlignment = getTextAlignment(tunes);
-  const className = [textAlignment].join(" ");
+  const className = [textAlignment].filter(Boolean).join(" ");
   // decode HTML entities
   const text = decode(data.text);
 
-  return <p className={className} dangerouslySetInnerHTML={{ __html: text }}></p>;
+  return <p className={className} dangerouslySetInnerHTML={{ __html: text }} />;
 }
 
-function getTextAlignment(tunes): string | null {
+function getTextAlignment(tunes?: BlockTunes): string | null {
   if (!tunes?.AlignmentTune?.alignment) return null;
 
-  const classMap = {
+  const classMap: Record<string, string> = {
     left: "text-left",
     center: "text-center",
     right: "text-right",
   };
 
-  return classMap[tunes.AlignmentTune.alignment];
+  return classMap[tunes.AlignmentTune.alignment] ?? null;
 }

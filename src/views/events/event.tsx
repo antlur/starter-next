@@ -50,7 +50,11 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function EventSingle({ event }) {
+interface EventSingleProps {
+  event: import("@antlur/backstage").Event;
+}
+
+export default async function EventSingle({ event }: EventSingleProps) {
   const website = await client.website.getWebsite();
   const locations = await client.locations.getLocations();
 

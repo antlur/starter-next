@@ -5,8 +5,13 @@ import { cn } from "@/lib/utils";
 import { Grid, List } from "lucide-react";
 import { useState } from "react";
 import BackstageImage from "@/components/backstage-image";
+import type { Event } from "@/types/backstage";
 
-export default function Events({ events }) {
+interface EventsProps {
+  events: Event[];
+}
+
+export default function Events({ events }: EventsProps) {
   const [tabView, setTabView] = useState("grid");
   return (
     <div
@@ -54,7 +59,11 @@ export default function Events({ events }) {
   );
 }
 
-function GridItem({ event }) {
+interface GridItemProps {
+  event: Event;
+}
+
+function GridItem({ event }: GridItemProps) {
   const startTime = new Date(event.start_time);
   const endTime = new Date(event.end_time);
 
@@ -94,7 +103,11 @@ function GridItem({ event }) {
   );
 }
 
-function ListItem({ event }) {
+interface ListItemProps {
+  event: Event;
+}
+
+function ListItem({ event }: ListItemProps) {
   const startTime = new Date(event.start_time);
   const endTime = new Date(event.end_time);
 

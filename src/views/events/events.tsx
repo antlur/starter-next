@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { dateString } from "@antlur/backstage/util/event";
 import { PlaceholderImage } from "./components/placeholder-image";
 import Link from "next/link";
-import type { Event } from "@antlur/backstage";
+import type { Event } from "@/types/backstage";
 
 interface EventProps {
   events: Event[];
@@ -70,7 +70,11 @@ export default function Events({ events }: EventProps) {
   );
 }
 
-function GridItem({ event }) {
+interface EventItemProps {
+  event: Event;
+}
+
+function GridItem({ event }: EventItemProps) {
   const startTime = new Date(event.start_time);
   const endTime = new Date(event.end_time);
 
@@ -119,7 +123,7 @@ function GridItem({ event }) {
   );
 }
 
-function ListItem({ event }) {
+function ListItem({ event }: EventItemProps) {
   const startTime = new Date(event.start_time);
   const endTime = new Date(event.end_time);
 

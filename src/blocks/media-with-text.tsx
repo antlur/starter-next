@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { MediaItem } from "@antlur/backstage";
 
 interface MediaWithTextProps {
-  media: any[];
+  media?: MediaItem[] | null;
   title?: string | null;
   subtitle?: string | null;
   content?: string | null;
@@ -48,13 +49,17 @@ export default function MediaWithText({
           <div className="space-y-4">
             <h2 className="text-2xl font-bold md:text-4xl text-balance">{title}</h2>
             {subtitle && <h3 className="text-lg text-gray-600 md:text-xl">{subtitle}</h3>}
-            <div
-              className="text-lg text-gray-500 md:text-xl text-pretty"
-              dangerouslySetInnerHTML={{ __html: content }}
-            ></div>
-            <Button asChild>
-              <a href={cta_url}>{cta_label}</a>
-            </Button>
+            {content && (
+              <div
+                className="text-lg text-gray-500 md:text-xl text-pretty"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            )}
+            {cta_url && cta_label && (
+              <Button asChild>
+                <a href={cta_url}>{cta_label}</a>
+              </Button>
+            )}
           </div>
         </div>
       </div>

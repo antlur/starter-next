@@ -1,9 +1,21 @@
 "use client";
 import Link from "next/link";
 import BackstageImage from "../components/backstage-image";
+import type { MediaItem } from "@antlur/backstage";
 
-export default function ImageLinkGrid({ title, max_columns = 3, items = [] }) {
-  const classMap = {
+interface ImageLinkItem {
+  link: string;
+  image: MediaItem;
+}
+
+interface ImageLinkGridProps {
+  title?: string;
+  max_columns?: number;
+  items?: ImageLinkItem[];
+}
+
+export default function ImageLinkGrid({ title, max_columns = 3, items = [] }: ImageLinkGridProps) {
+  const classMap: Record<number, string> = {
     1: "lg:grid-cols-1",
     2: "lg:grid-cols-2",
     3: "lg:grid-cols-3",

@@ -21,11 +21,15 @@ interface HeroVideoProps {
   };
 }
 export default function HeroVideo({ media, poster }: HeroVideoProps) {
+  if (!media) {
+    return null;
+  }
+
   return (
     <div className="relative w-full aspect-video lg:h-[85vh] container-breakout">
       <video
         className="absolute inset-0 object-cover w-full h-full"
-        poster="poster?.transform_url"
+        poster={poster?.transform_url}
         autoPlay
         loop
         muted

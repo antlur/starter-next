@@ -1,6 +1,11 @@
 import LayoutFactory from "@/views/layout-factory";
+import type { Press } from "@antlur/backstage";
 
-export default async function Press({ articles }) {
+interface PressesProps {
+  articles: Press[];
+}
+
+export default async function Presses({ articles }: PressesProps) {
   return (
     <LayoutFactory>
       <div className="relative max-w-3xl px-6 mx-auto lg:px-0">

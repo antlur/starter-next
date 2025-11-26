@@ -3,7 +3,7 @@ import GoogleRecaptchaScript from "@/components/google-recaptcha-script";
 import GoogleRecaptchaSubmit from "@/components/google-recaptcha-submit";
 import axios from "axios";
 import { MutableRefObject, useRef, useState } from "react";
-import { FormFactory } from "./form-factory";
+import { FormFactory, FormSchema } from "./form-factory";
 import type { Website, Menu, Location } from "@antlur/backstage";
 
 interface BasicContactFormProps {
@@ -11,6 +11,7 @@ interface BasicContactFormProps {
   type?: string | null;
   title?: string | null;
   subtitle?: string | null;
+  form?: FormSchema | null;
   website: Website;
   menus: Menu[];
   locations: Location[];
@@ -29,17 +30,18 @@ export default function Form({
   const [submitting, setSubmitting] = useState(false);
   const [files, setFiles] = useState([]);
 
-  async function handleSubmit(e: any) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    e.target.reportValidity();
-    if (!e.target.checkValidity()) return;
+    const target = e.target as HTMLFormElement;
+    target.reportValidity();
+    if (!target.checkValidity()) return;
 
-    let headers = {
+    const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "x-api-request": "true",
     };
 
-    if (form.type === "application") {
+    if (form?.type === "application") {
       headers["Content-Type"] = "multipart/form-data";
     }
     setSubmitting(true);
@@ -47,28 +49,27 @@ export default function Form({
       await axios({
         method: "POST",
         url: `${process.env.NEXT_PUBLIC_BCKSTG_API_URL ?? "https://bckstg.app/api"}/wa/forms/${form_id}`,
-        data: Object.fromEntries(new FormData(formRef.current).entries()),
+        data: formRef.current ? Object.fromEntries(new FormData(formRef.current).entries()) : {},
         headers: headers,
       });
       alert("We received your message and will be in touch shortly!");
       formRef.current?.reset();
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
       alert(`We can't send your message. Please try again.`);
     } finally {
       setSubmitting(false);
     }
   }
 
-  let formProps = {
+  const formProps: React.FormHTMLAttributes<HTMLFormElement> = {
     action: "#",
     id: "form",
     method: "POST",
     className: "max-w-md mx-auto space-y-4",
   };
 
-  if (form.type === "application") {
-    // @ts-ignore
+  if (form?.type === "application") {
     formProps.encType = "multipart/form-data";
   }
 
@@ -98,7 +99,7 @@ export default function Form({
           </div>
           <form ref={formRef} {...formProps} onSubmit={handleSubmit}>
             {/* <FormFactory files={files} setFiles={setFiles} website={website} locations={locations} menus={menus} /> */}
-            <FormFactory form={form} />
+            {form && <FormFactory form={form} />}
             <div className="relative pb-6">
               {submitting && (
                 <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-white opacity-50"></div>
