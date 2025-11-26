@@ -1,16 +1,16 @@
-import { defineLayoutSchema } from "@antlur/backstage/studio";
+import { defineLayoutSchema, defineField } from "@antlur/backstage/studio";
 
 export default defineLayoutSchema({
-  fields: {
-    headerNavigation: {
+  fields: [
+    defineField({
       name: "Header Navigation",
       slug: "headerNavigation",
       type: "navigation_select",
-    },
-    featuredImage: {
+    }),
+    defineField({
       name: "Featured Image",
       slug: "featuredImage",
       type: "media",
-    },
-  },
+    }),
+  ],
 });

@@ -1,31 +1,31 @@
-import { defineBlockSchema as defineSchema } from "@antlur/backstage/studio";
+import { defineBlockSchema as defineSchema, defineField } from "@antlur/backstage/studio";
 
 export default defineSchema({
-  fields: {
-    title: {
+  fields: [
+    defineField({
       name: "Title",
       slug: "title",
       type: "text",
-    },
-    subtitle: {
+    }),
+    defineField({
       name: "Subtitle",
       slug: "subtitle",
       type: "text",
-    },
-    backgroundImage: {
+    }),
+    defineField({
       name: "Background Image",
       slug: "backgroundImage",
       type: "image",
-    },
-    ctaText: {
+    }),
+    defineField({
       name: "CTA Text",
       slug: "ctaText",
       type: "text",
-    },
-    ctaLink: {
+    }),
+    defineField({
       name: "CTA Link",
       slug: "ctaLink",
       type: "text",
-    },
-  },
+    }),
+  ],
 });

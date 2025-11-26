@@ -6,6 +6,14 @@ export default function Hero({ block }: BlockComponentProps<typeof schema>) {
   const { title, subtitle, backgroundImage, ctaText, ctaLink } = block.fields;
   const full_width = false;
 
+  if (!backgroundImage) {
+    return null;
+  }
+
+  if (!ctaLink) {
+    return null;
+  }
+
   return (
     <div
       className={cn("relative z-0 w-full h-[40vh]", {
