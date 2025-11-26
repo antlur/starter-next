@@ -1,13 +1,18 @@
-import { Route } from "@/views/route-factory";
+import type { Route } from "@/views/route-factory";
 
-export function RouteSeo({ route }: { route: Route }) {
-  const title = route.meta?.seo?.title;
-  const description = route.meta?.seo?.description;
+interface RouteSeoProps {
+  route: Route;
+}
+
+export function RouteSeo({ route }: RouteSeoProps) {
+  const seo = route.meta?.seo;
+  const title = seo?.title ?? "";
+  const description = seo?.description ?? "";
 
   return (
     <>
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
     </>
   );
 }
