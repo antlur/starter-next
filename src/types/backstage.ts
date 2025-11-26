@@ -1,9 +1,9 @@
 /**
  * Shared Backstage CMS types
- * 
+ *
  * These types extend/re-export from @antlur/backstage for local use
  * and provide additional helper types for the starter template.
- * 
+ *
  * For canonical types, import directly from @antlur/backstage:
  *   import type { Website, Page, Event } from "@antlur/backstage";
  */
@@ -100,8 +100,8 @@ export interface BlockTunes {
 export interface LocalBlock<T = Record<string, unknown>> {
   id: string;
   block?: string; // Block type identifier (local convention)
-  slug?: string;  // Block type identifier (@antlur/backstage convention)
-  type?: string;  // Legacy support
+  slug?: string; // Block type identifier (@antlur/backstage convention)
+  type?: string; // Legacy support
   data: T;
   tunes?: BlockTunes;
 }
