@@ -7,7 +7,7 @@ import hero from "./blocks/hero";
 /**
  * Backstage CMS Configuration
  * This config is shared between runtime and prebuild scripts
- * 
+ *
  * Environment variables required:
  * - BACKSTAGE_ACCOUNT_ID: Your Backstage account ID
  * - BACKSTAGE_API_KEY: Your Backstage API key

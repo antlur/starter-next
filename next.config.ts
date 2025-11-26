@@ -26,8 +26,9 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
 
+  // TypeScript type checking during build
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   // eslint: {
   //   ignoreDuringBuilds: true,
