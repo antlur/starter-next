@@ -40,33 +40,8 @@ export async function RouteFactory({ route }: { route: Route }) {
   );
 }
 
-/**
- * PageRoute component
- * @param param0 - The route object
- * @returns The rendered PageFactory component
- */
 function PageRoute({ route }: { route: Route }) {
   return <PageFactory page={route.data as Page} />;
-}
-
-/**
- * MenuRoute component
- * @param param0 - The route object
- * @returns The rendered MenuView component
- */
-function MenuRoute({ route }: { route: Route }) {
-  const location = route.meta.location || null;
-  return <MenuView menu={route.data} location={location} />;
-}
-
-function LocationRoute({ route }: { route: Route }) {
-  return (
-    <LayoutFactory isLocationPage={true}>
-      <Container>
-        <LocationView location={route.data} />
-      </Container>
-    </LayoutFactory>
-  );
 }
 
 async function EventsRoute({ route }: { route: Route }) {

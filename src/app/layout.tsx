@@ -34,11 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased flex flex-col`}>
         <SkipToMain />
-        <Header />
-        <main id="main" className="grow">
-          <Suspense fallback={<LoadingSkeleton />}>{children}</Suspense>
-        </main>
-        <Footer />
+        {children}
       </body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>

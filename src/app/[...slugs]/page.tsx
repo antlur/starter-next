@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import { client } from "@backstage/client";
 import { Route, RouteFactory } from "@/views/route-factory";
+import { getResolvedRoute, makeRoutePath } from "@backstage/util/routes";
 
 export async function generateStaticParams() {
   const routes = await client.website.routes();
@@ -12,18 +13,6 @@ export async function generateStaticParams() {
   return arrayOfUrlParts.map((urlParts) => ({
     slugs: urlParts,
   }));
-}
-
-async function getResolvedRoute(path: string): Promise<Route | null> {
-  "use cache";
-  return await client.routes.resolve<Route>(path).catch(() => null);
-}
-
-function makeRoutePath(slugs: string[] | undefined): string {
-  if (!slugs || slugs.length === 0) {
-    return "/";
-  }
-  return "/" + slugs.join("/");
 }
 
 export default async function AppPage(props: PageProps<"/[...slugs]">) {
